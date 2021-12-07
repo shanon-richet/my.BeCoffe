@@ -35,11 +35,23 @@ app.use(cookieParser())
 app.get('/',(req,res) => {
     session = req.session;
     if(session.userid){
-        res.send("Welcome User <a href=\'/logout'>click to logout</a>");
+        res.sendFile(__dirname + '/views/dashboard.html');
     } else {
         res.sendFile(__dirname + '/views/index.html')
     }
 });
+
+// User dashboard
+app.post('/user',(req,res) => {
+    if(req.body.username == myusername && req.body.password == mypassword){
+        session = req.session;
+        session.userid = req.body.username;
+        res.sendFile(__dirname + '/views/dashboard.html');
+    }
+    else{
+        res.send(`Invalid username or password`);
+    }
+})
 
 // We tell our server to remain open, and listen to every incoming request
 app.listen(PORT, () => console.log(`server started`));

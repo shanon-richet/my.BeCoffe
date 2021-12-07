@@ -41,6 +41,12 @@ app.get('/',(req,res) => {
     }
 });
 
+// Logout
+app.post('/logout',(req,res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
+
 // User dashboard
 app.post('/user',(req,res) => {
     if(req.body.username == myusername && req.body.password == mypassword){

@@ -1,14 +1,33 @@
-const main= document.querySelector('main')
+const main= document.querySelector('.dashboard')
+const recipeForm= document.querySelector('.dashboard form')
+const submit= document.querySelector('.submit_recipe')
 
 const date = new Date();
-const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
+const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+const date= document.querySelector('.date')
+          
 for (let i= 0; i < 15; i++) {
-    var calendar= document.createElement('section')
+    var calendar= document.createElement('button')
     var squares= document.createElement('p')
     calendar.appendChild(squares)
     main.appendChild(calendar)
+    calendar.onclick= (e) => {
+        if (recipeForm.classList.contains('recipe_form_hidden')) {
+            recipeForm.classList.add('recipe_form')
+            recipeForm.classList.remove('recipe_form_hidden')
+            console.log(e.target)  
+
+        }
+        else {
+            recipeForm.classList.add('recipe_form_hidden')
+            recipeForm.classList.remove('recipe_form')
+        }
+    }
 }
+submit.onclick= () => {
+    alert('e')    
+}
+
 
 const square= document.querySelectorAll('p')
 square[0].innerText= new Date(date.getTime()).toLocaleDateString('fr-FR', options);
@@ -26,6 +45,4 @@ square[11].innerText= new Date(date.getTime() + 950400000).toLocaleDateString('f
 square[12].innerText= new Date(date.getTime() + 1036800000).toLocaleDateString('fr-FR', options);
 square[13].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('fr-FR', options);
 square[14].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('fr-FR', options);
-
-
 

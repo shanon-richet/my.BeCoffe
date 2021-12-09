@@ -19,3 +19,21 @@ main p {
 main p:hover {
     cursor: pointer;
 }
+.recipe_form_hidden {
+    display: none;
+}
+.recipe_form {
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(92, 108, 119);
+    width: 400px;
+    height: 180px;
+    border-radius: 3%;
+    text-align: center;
+}
+.recipe_form, .recipe_form label, .recipe_form input {
+    margin: 10px;
+}
+.recipe_form label {
+    float: left;
+}

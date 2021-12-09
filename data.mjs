@@ -8,11 +8,11 @@ const data = [
     ['Esteban', 'Veraart', 'esteban.veraart@gmail.com', 'P.Mr9{', true],
     ['Youssef', 'Akanni', 'youssefakanni2003@gmail.com', ']dA6wm', true],
     ['Shanon', 'Richet', 'shanon.richet@gmail.com', 'm;Pf4p', true],
+    ['Axel', 'Tavormina', 'tavormina.axel@gmail.com', '=*Uw6,', true],
     ['Dylan', 'Richardson', 'dylanrichardson1606@gmail.com', '7FJ+b{', true],
     ['Aubry', 'Franquinet', 'aubry.franquinet@hotmail.com', 'Yz9^bt', true],
-    ['Axel', 'Tavormina', 'tavormina.axel@gmail.com', '=*Uw6,', true],
     ['Kelian', 'Christophe', 'kelian.christophe@becode.org', 'y`7Ck,', false],
     ['Michel', 'Plainchamp', 'michel.plainchamp@becode.org', '`T7Pzk', false]
-]
+];
 
-export default data
+export default data;

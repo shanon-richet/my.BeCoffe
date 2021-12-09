@@ -13,7 +13,8 @@ for (let i= 0; i < 15; i++) {
         if (recipeForm.classList.contains('recipe_form_hidden')) {
             recipeForm.classList.add('recipe_form')
             recipeForm.classList.remove('recipe_form_hidden')
-            console.log(e.target)  
+            var inputDate= document.querySelector('.date')
+            inputDate.value= e.target.innerText;
         }
         else {
             recipeForm.classList.add('recipe_form_hidden')

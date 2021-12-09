@@ -1,0 +1,39 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 900px;
+    margin: 50px;
+}
+main section {
+margin-top: -30px;
+}
+main p {
+    background-color: rgb(17, 83, 224);
+    opacity: 0.5;
+    width: 150px;
+    height: 150px;
+    border-radius: 5%;
+    border: 1px ridge black;
+}
+main p:hover {
+    cursor: pointer;
+}
+.recipe_form_hidden {
+    display: none;
+}
+.recipe_form {
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(92, 108, 119);
+    width: 400px;
+    height: 180px;
+    border-radius: 3%;
+    text-align: center;
+}
+.recipe_form, .recipe_form label, .recipe_form input {
+    margin: 10px;
+}
+.recipe_form label {
+    float: left;
+}

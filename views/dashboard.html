@@ -23,7 +23,7 @@
     </form>
 
     <main class= "dashboard">
-        <form class= "recipe_form_hidden" action="/dashboard" method="post">
+        <form class= "recipe_form_hidden" action="/dashboard/recipes" method="post">
             <div>
                 <label for="recipe">Recipe :</label>
                 <input type="text" id="recipe" name="recipe">
@@ -34,11 +34,11 @@
             </div>
             <div>
                 <label for= "date">Date : </label>
-                <input type= "text" value= "" class= "date" name= "date">
+                <input type= "date" value= "" class= "date" name= "date">
             </div>
             <input class= "submit_recipe" type= "submit" value= "Submit">
         </form>        
     </main>
-    <script src= "shanon.js"></script>
+    <script src="shanon.js"></script>
 </body>
 </html>

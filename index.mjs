@@ -1,8 +1,8 @@
 import pg from 'pg';
-import {user, host, database, database_url, password, port } from './credentials.mjs';
+import { user, host, database, database_url, password, port } from './credentials.mjs';
 
-const { Client } = pg
-const client = new Client({
+const { Pool } = pg
+const pool = new Pool({
   connectionString: database_url,
   ssl: {
     rejectUnauthorized: false
@@ -13,12 +13,25 @@ const client = new Client({
   password: password, 
   port: port,
 })
-client.connect()
 
-client.query('SELECT * FROM users', (err, res) => {
-  if (err) {
-    console.log(err.stack)
+export const getUsername = async (email) => {
+  const client = await pool.connect()
+  const query = await client.query('SELECT email FROM users WHERE email=$1', [email])
+
+  if(query.rowCount !== 0) {
+    return query.rows[0].email
   } else {
-    console.log(res.rows)
+    return false;
   }
-})
+}
+
+export const getPassword = async (email) => {
+  const client = await pool.connect()
+  const query = await client.query('SELECT password FROM users WHERE email=$1', [email])
+
+  if(query.rowCount !== 0) {
+    return query.rows[0].password
+  } else {
+    return false;
+  }
+}

@@ -6,14 +6,12 @@ import  {v4 as uuidv4} from 'uuid';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+import { getUsername, getPassword } from './index.mjs'
+
 const PORT = 3000;
 const app = express();
 const oneDay = 1000 * 60 * 60 * 24;
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-//username and password mocks
-const myusername = 'tavormina.axel@gmail.com'
-const mypassword = '1234'
 
 let session;
 
@@ -47,15 +45,15 @@ app.post('/logout',(req,res) => {
     res.redirect('/');
 });
 
-// User dashboard
-app.post('/user',(req,res) => {
-    if(req.body.username == myusername && req.body.password == mypassword){
+// Dashboard
+app.post('/dashboard', async(req,res) => {
+    if(req.body.username == await getUsername(req.body.username) && req.body.password == await getPassword(req.body.username)){
         session = req.session;
         session.userid = req.body.username;
         res.sendFile(__dirname + '/views/dashboard.html');
     }
     else{
-        res.send(`Invalid username or password`);
+        res.sendFile(__dirname + '/views/login-failed.html');
     }
 })
 

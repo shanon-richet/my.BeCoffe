@@ -1,8 +1,9 @@
 import pg from 'pg';
 import {user, host, database, database_url, password, port } from './credentials.mjs';
+import DATA from './data.mjs';
 
-const { Client } = pg
-const client = new Client({
+const { Pool } = pg
+const pool = new Pool({
   connectionString: database_url,
   ssl: {
     rejectUnauthorized: false
@@ -13,12 +14,32 @@ const client = new Client({
   password: password, 
   port: port,
 })
-client.connect()
 
-client.query('SELECT * FROM users', (err, res) => {
-  if (err) {
-    console.log(err.stack)
-  } else {
-    console.log(res.rows)
+export const newUser = async (first_name, last_name, email, password, learner) => {
+  console.log(first_name, last_name, email, password, learner);
+  const client = await pool.connect()
+  const exists = await client.query('SELECT email FROM users WHERE email=$1', [email])
+  console.log(exists.rowCount)
+
+  /* if user does not already exist, row count === 0 */
+  if(exists.rowCount === 0){
+    console.log(`Begin... ${first_name} ${last_name} is a ${learner ? 'learner' : 'coach'}`)
+    await client.query(
+      'INSERT INTO users (first_name, last_name, email, password, learner) VALUES ($1, $2, $3, $4, $5)',
+      [first_name, last_name, email, password, learner]
+    )
+    client.release()
+    return true
   }
-})
+  
+  client.release()
+  return false
+}
+
+export const setupDB = async () => {
+  for (const [first_name, last_name, email, password, learner] of DATA) {
+    await newUser(first_name, last_name, email, password, learner)
+  }
+
+  return true
+}

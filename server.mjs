@@ -5,6 +5,7 @@ import cors from "cors";
 import  {v4 as uuidv4} from 'uuid';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { setupDB } from "./index.mjs";
 
 const PORT = 3000;
 const app = express();
@@ -58,6 +59,13 @@ app.post('/user',(req,res) => {
         res.send(`Invalid username or password`);
     }
 })
+
+// Get Database
+// app.post('/setup', async (res) => {
+//     console.log('here');
+//     const database = await setupDB();
+//     res.send(database);
+// });
 
 // We tell our server to remain open, and listen to every incoming request
 app.listen(PORT, () => console.log(`server started`));

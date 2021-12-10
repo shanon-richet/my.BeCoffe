@@ -5,10 +5,12 @@ main {
     width: 900px;
     margin: 50px;
 }
+
 main section {
-margin-top: -30px;
+    margin-top: -30px;
 }
-main p {
+
+main .calendar-square {
     background-color: rgb(17, 83, 224);
     opacity: 0.5;
     width: 150px;
@@ -16,12 +18,15 @@ main p {
     border-radius: 5%;
     border: 1px ridge black;
 }
-main p:hover {
+
+main .calendar-square:hover {
     cursor: pointer;
 }
+
 .recipe_form_hidden {
     display: none;
 }
+
 .recipe_form {
     position: absolute;
     z-index: 1;
@@ -31,15 +36,42 @@ main p:hover {
     border-radius: 3%;
     text-align: center;
 }
+
 .recipe_form, .recipe_form label, .recipe_form input {
     margin: 10px;
 }
+
 .recipe_form label {
     float: left;
 }
+
 .weekDays {
   background: green;
   height: 40px;
   text-align: center;
   color: white;
+}
+
+.recipe-talks {
+    display: flex;
+    flex-direction: row;
+}
+
+.upcoming-recipe-talks {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+}
+
+.one-upcoming-talk {
+    margin: 2vh 0;
+}
+
+.one-upcoming-talk > p,
+.one-upcoming-talk > h4 {
+    margin: 0;
+}
+
+.calendar {
+    width: 70vw;
 }

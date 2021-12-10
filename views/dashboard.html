@@ -9,36 +9,45 @@
 </head>
 <body>
     <h1>My Dashboard</h1>
-    <div>
-        <button>9:00</button>
-        <button>12:30</button>
-        <button>13:30</button>
-        <button>17:00</button>
-    </div>
+    <main>
+        <form action="/logout" method="post">
+            <input value="logout" type="submit">
+        </form>
 
-    <div>Recipe talks</div>
+        <div>
+            <button>9:00</button>
+            <button>12:30</button>
+            <button>13:30</button>
+            <button>17:00</button>
+        </div>
 
-    <form action="/logout" method="post">
-        <input value="logout" type="submit">
-    </form>
+        <div class="recipe-talks">
+            <div class="upcoming-recipe-talks">
+                <h2>Recipe talks</h2>
+            </div>
 
-    <main class= "dashboard">
-        <form class= "recipe_form_hidden" action="/dashboard/recipes" method="post">
-            <div>
-                <label for="recipe">Recipe :</label>
-                <input type="text" id="recipe" name="recipe">
+            <div class= "calendar">
+                <form class= "recipe_form_hidden" action="/dashboard/recipe" method="post">
+                    <div>
+                        <label for="recipe">Recipe :</label>
+                        <input type="text" id="recipe" name="recipe">
+                    </div>
+                    <div>
+                        <label for="author">Author(s) :</label>
+                        <input type="text" id="author" name="author">
+                    </div>
+                    <div>
+                        <label for="date">Date : </label>
+                        <input type="text" value="" class="date" name="date">
+                    </div>
+                    <input class="submit_recipe" type="submit" value="Submit">
+                </form>        
             </div>
-            <div>
-                <label for="author">Author(s) :</label>
-                <input type="text" id="author" name="author">
-            </div>
-            <div>
-                <label for= "date">Date : </label>
-                <input type= "date" value= "" class= "date" name= "date">
-            </div>
-            <input class= "submit_recipe" type= "submit" value= "Submit">
-        </form>        
+        </div>
     </main>
     <script src="shanon.js"></script>
+    <script src="getTalks.js"></script>
+    <script src="addTalk.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </body>
 </html>

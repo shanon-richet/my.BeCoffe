@@ -1,21 +1,24 @@
-const main= document.querySelector('main')
-const recipeForm= document.querySelector('.recipe_form_hidden')
+const recipeTalks = document.querySelector('recipe-talks')
+const recipeForm = document.querySelector('.recipe_form_hidden')
 
 const date = new Date();
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-const days= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-for (let i= 0; i < 20; i++) {
-    var calendar= document.createElement('section')
-    var squares= document.createElement('p')
-    calendar.appendChild(squares)
-    main.appendChild(calendar)
-    squares.onclick= (e) => {
+for (let i = 0; i < 20; i++) {
+    const calendar = document.createElement('section')
+    const squares = document.createElement('p')
+    squares.classList.add('calendar-square')
+
+    calendar.appendChild(squares);
+    recipeTalks.appendChild(calendar);
+
+    squares.onclick = (e) => {
         if (recipeForm.classList.contains('recipe_form_hidden')) {
             recipeForm.classList.add('recipe_form')
             recipeForm.classList.remove('recipe_form_hidden')
-            var inputDate= document.querySelector('.date')
-            inputDate.value= e.target.innerText;
+            var inputDate = document.querySelector('.date')
+            inputDate.value = e.target.innerText;
         }
         else {
             recipeForm.classList.add('recipe_form_hidden')
@@ -24,12 +27,13 @@ for (let i= 0; i < 20; i++) {
     }
 }
 
-const square= document.querySelectorAll('p')
+const square = document.querySelectorAll('p')
 
-for (let i= 0; i< 5; i++) {
-  square[i].innerText= days[i]
+for (let i = 0; i < 5; i++) {
+  square[i].innerText = days[i]
   square[i].classList.add('weekDays')
 }
+
 if (new Date(date.getDay() == 5)) {
   square[5].innerText= new Date(date.getTime() - 345600000).toLocaleDateString('fr-Fr', options);//lundi
   square[6].innerText= new Date(date.getTime() - 259200000).toLocaleDateString('fr-FR', options);//mardi

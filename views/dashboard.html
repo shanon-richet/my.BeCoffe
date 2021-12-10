@@ -26,22 +26,25 @@
                 <h2>Recipe talks</h2>
             </div>
 
-            <div class= "calendar">
-                <form class= "recipe_form_hidden" action="/dashboard/recipe" method="post">
-                    <div>
-                        <label for="recipe">Recipe :</label>
-                        <input type="text" id="recipe" name="recipe">
-                    </div>
-                    <div>
-                        <label for="author">Author(s) :</label>
-                        <input type="text" id="author" name="author">
-                    </div>
-                    <div>
-                        <label for="date">Date : </label>
-                        <input type="text" value="" class="date" name="date">
-                    </div>
-                    <input class="submit_recipe" type="submit" value="Submit">
-                </form>        
+            <div class= "calendar-div">
+                <h2>Calendar</h2>
+                <div class="calendar">
+                    <form class= "recipe_form_hidden" action="/dashboard/recipe" method="post">
+                        <div>
+                            <label for="recipe">Recipe :</label>
+                            <input type="text" id="recipe" name="recipe">
+                        </div>
+                        <div>
+                            <label for="author">Author(s) :</label>
+                            <input type="text" id="author" name="author">
+                        </div>
+                        <div>
+                            <label for="date">Date : </label>
+                            <input type="text" value="" class="date" name="date">
+                        </div>
+                        <input class="submit_recipe" type="submit" value="Submit">
+                    </form>
+                </div>     
             </div>
         </div>
     </main>

@@ -1,7 +1,4 @@
-const submitRecipeBtn = document.querySelector('.submit_recipe');
-submitRecipeBtn.addEventListener('click', addTalkToDB);
-
-export const addTalkToDB = () => {
+const addTalkToDB = () => {
     console.log('in function')
     const form = document.querySelector('.recipe_form_hidden');
 
@@ -31,3 +28,6 @@ export const addTalkToDB = () => {
 
     window.location.reload(); 
 }
+
+const submitRecipeBtn = document.querySelector('.submit_recipe');
+submitRecipeBtn.addEventListener('click', addTalkToDB);

@@ -37,3 +37,9 @@ main p:hover {
 .recipe_form label {
     float: left;
 }
+.weekDays {
+  background: green;
+  height: 40px;
+  text-align: center;
+  color: white;
+}

@@ -6,12 +6,13 @@ fetch('http://localhost:3000/dashboard/recipe/')
 .then(response => response.json())
 .then(json => {
     for (const talk of json) {
-        if (isThisWeek(talk.date)) {
+        if (isLaterThisWeek(talk.date)) {
             const singleTalk = document.createElement('div');
             singleTalk.classList.add('one-upcoming-talk');
 
             const date = document.createElement('p');
-            date.innerText = talk.date;
+            const formattedDate = new Date(talk.date).toLocaleDateString();
+            date.innerText = formattedDate;
 
             const recipe = document.createElement('h4');
             recipe.innerText = talk.recipe;
@@ -57,9 +58,12 @@ fetch('http://localhost:3000/dashboard/recipe/')
 //     return null;
 // };
 
-const isThisWeek = (date) => {
+const isLaterThisWeek = (date) => {
     const today = moment();
     const talkDay = moment(date);
 
-    return (today.isoWeek() === talkDay.isoWeek());
+    if (today.isoWeek() === talkDay.isoWeek() && talkDay > today) {
+        return true;
+    }
+    return false;
 }

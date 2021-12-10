@@ -38,14 +38,11 @@ export const getPassword = async (email) => {
 }
 
 export const newUser = async (first_name, last_name, email, password, learner) => {
-  console.log(first_name, last_name, email, password, learner);
   const client = await pool.connect()
   const exists = await client.query('SELECT email FROM users WHERE email=$1', [email])
-  console.log(exists.rowCount)
 
   /* if user does not already exist, row count === 0 */
   if(exists.rowCount === 0){
-    console.log(`Begin... ${first_name} ${last_name} is a ${learner ? 'learner' : 'coach'}`)
     await client.query(
       'INSERT INTO users (first_name, last_name, email, password, learner) VALUES ($1, $2, $3, $4, $5)',
       [first_name, last_name, email, password, learner]
@@ -56,6 +53,65 @@ export const newUser = async (first_name, last_name, email, password, learner) =
   
   client.release()
   return false
+}
+
+export const addRecipeTalkToDB = async (id, date, recipe) => {
+  const client = await pool.connect()
+  const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [id])
+  const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
+  console.log(full_name);
+  console.log(user)
+
+  await client.query(
+    'INSERT INTO dates (user_id, date, recipe, available) VALUES ($1, $2, $3, $4)',
+    [id, date, recipe, false]
+  )
+  client.release();
+
+  return ({full_name, date, recipe});
+}
+
+export const editTalk = async (date, recipe) => {
+  const client = await pool.connect()
+
+  const edit = await client.query(
+    'UPDATE dates SET recipe = $1 WHERE date = $2', [recipe, date]
+  )
+  client.release();
+
+  return edit;
+}
+
+export const deleteTalk = async (date) => {
+  const client = await pool.connect()
+
+  const talk = await client.query(
+      'DELETE FROM dates WHERE date = $1', [date]
+  );
+  client.release();
+
+  return talk;
+}
+
+export const getAllTalks = async () => {
+  const client = await pool.connect()
+  const response = await client.query('SELECT first_name, last_name, date, recipe FROM dates LEFT JOIN users on dates.user_id = users.id')
+  client.release();
+
+  const talks = response.rows;
+  const allTalks = [];
+  for (const talk of talks) {
+    const formattedDate = talk.date.toISOString().slice(0, 10);;
+
+    const talkObj = {
+      name: `${talk.first_name} ${talk.last_name}`,
+      date: formattedDate,
+      recipe: talk.recipe
+    }
+    allTalks.push(talkObj);
+  }
+
+  return (allTalks);
 }
 
 export const setupDB = async () => {

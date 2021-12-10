@@ -1,15 +1,12 @@
-var express = require('express')
-var cors = require('cors')
-var app = express()
-
+import express from "express";
 import sessions from "express-session";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import  {v4 as uuidv4} from 'uuid';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { setupDB } from "./index.mjs";
-
 import { getUsername, getPassword } from './index.mjs'
+import recipeRoute from './routes/recipe.mjs';
 
 const PORT = 3000;
 const app = express();
@@ -21,6 +18,7 @@ let session;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 // Initiliaze the sessions
 app.use(sessions({
@@ -60,12 +58,7 @@ app.post('/dashboard', async(req,res) => {
     }
 })
 
-// Get Database
-// app.post('/setup', async (res) => {
-//     console.log('here');
-//     const database = await setupDB();
-//     res.send(database);
-// });
+app.use('/dashboard/recipe', recipeRoute);
 
 // We tell our server to remain open, and listen to every incoming request
 app.listen(PORT, () => console.log(`server started`));

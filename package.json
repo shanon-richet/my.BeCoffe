@@ -2,7 +2,7 @@
   "name": "my.becoffe",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "devStart": "nodemon server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"

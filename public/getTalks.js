@@ -5,10 +5,7 @@ const recipetalks = document.querySelector('.upcoming-recipe-talks');
 fetch('http://localhost:3000/dashboard/recipe/')
 .then(response => response.json())
 .then(json => {
-    console.log(json)
     for (const talk of json) {
-        console.log(talk.recipe);
-
         if (isThisWeek(talk.date)) {
             const singleTalk = document.createElement('div');
             singleTalk.classList.add('one-upcoming-talk');

@@ -1,4 +1,3 @@
-const recipeTalks = document.querySelector('recipe-talks')
 const recipeForm = document.querySelector('.recipe_form_hidden')
 
 const date = new Date();
@@ -6,12 +5,11 @@ const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 for (let i = 0; i < 20; i++) {
-    const calendar = document.createElement('section')
+    const calendar = document.querySelector('.calendar')
     const squares = document.createElement('p')
     squares.classList.add('calendar-square')
 
     calendar.appendChild(squares);
-    recipeTalks.appendChild(calendar);
 
     squares.onclick = (e) => {
         if (recipeForm.classList.contains('recipe_form_hidden')) {

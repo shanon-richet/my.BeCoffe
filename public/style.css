@@ -45,6 +45,13 @@ main .calendar-square:hover {
     float: left;
 }
 
+.weekDays {
+  background: green;
+  height: 40px;
+  text-align: center;
+  color: white;
+}
+
 .recipe-talks {
     display: flex;
     flex-direction: row;

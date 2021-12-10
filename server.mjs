@@ -1,7 +1,9 @@
-import express from "express";
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
 import sessions from "express-session";
 import cookieParser from "cookie-parser";
-import cors from "cors";
 import  {v4 as uuidv4} from 'uuid';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';

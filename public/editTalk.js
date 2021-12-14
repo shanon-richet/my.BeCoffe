@@ -14,7 +14,7 @@ const editTalk = () => {
         recipe: newRecipe
     };
 
-    fetch('http://localhost:3000/dashboard/recipe/', {
+    fetch('http://localhost:3000/dashboard/recipe/' + newDate, {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json'
@@ -27,6 +27,7 @@ const editTalk = () => {
         if (result[0].message) {
             alert(result[0].message);
         }
+        window.location.reload();
     })
     .catch(error => {
         console.error('Error:', error);

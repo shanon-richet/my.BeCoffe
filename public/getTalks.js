@@ -4,12 +4,17 @@ fetch('http://localhost:3000/dashboard/recipe/')
 .then(response => response.json())
 .then(json => {
     for (const talk of json) {
-        if (isLaterThisWeek(talk.date)) {
+        const day = new Date(talk.date);
+        const fixedDay = new Date();
+
+        fixedDay.setDate(day.getDate() + 1);
+
+        if (isLaterThisWeek(fixedDay)) {
             const singleTalk = document.createElement('div');
             singleTalk.classList.add('one-upcoming-talk');
 
             const date = document.createElement('p');
-            const formattedDate = new Date(talk.date).toLocaleDateString();
+            const formattedDate = new Date(fixedDay).toLocaleDateString();
             date.innerText = formattedDate;
 
             const recipe = document.createElement('h4');
@@ -24,14 +29,16 @@ fetch('http://localhost:3000/dashboard/recipe/')
             recipetalks.appendChild(singleTalk);
         }
 
-        const calendarDate = findCalendarDate(talk.date);
+        const calendarDate = findCalendarDate(fixedDay);
         if (calendarDate !== null) {
             const div = document.createElement('div');
             div.classList.add('added-recipe-talk');
 
             calendarDate.onclick = null;
 
-            div.onclick = () => {
+            div.onclick = (e) => {
+                console.log('here');
+                console.log(e.target)
                 const form = document.querySelector('.edit-recipe-form');
                 form.style.display = 'flex';
 
@@ -58,7 +65,8 @@ fetch('http://localhost:3000/dashboard/recipe/')
     }
 })
 
-const findCalendarDate = (date) => {
+const findCalendarDate = (dateStr) => {
+    const date = moment(dateStr).format('YYYY-MM-DD');
     const calendarDates = document.querySelectorAll('.calendar-square');
 
     for (const calDate of calendarDates ) {

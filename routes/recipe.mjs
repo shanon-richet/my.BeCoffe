@@ -18,26 +18,26 @@ router
     })
     .post(async (req, res) => {
         const newRecipe = await addRecipeTalkToDB(req.body.id, req.body.date, req.body.recipe);
-        res.send(newRecipe);
+        res.json(newRecipe);
     }) 
-    .patch(async (req, res) => {
-        const editedRecipeTalk = await editTalk(req.body.date, req.body.recipe);
-        res.send(editedRecipeTalk);
-    })
+    // .patch(async (req, res) => {
+    //     const editedRecipeTalk = await editTalk(req.body.date, req.body.recipe);
+    //     res.json(editedRecipeTalk);
+    // })
+
+router
+    .route('/:date')
     .delete(async (req, res) => {
-        const deletedTalk = await deleteTalk(req.body.date);
+        const deletedTalk = await deleteTalk(req.params.date);
         res.send(deletedTalk);
     })
-
-// router
-//     .route('/:date')
-//     .post(async (req, res) => {
-//         const newRecipe = await addRecipeTalkToDB(req.body.id, req.params.date, req.body.recipe);
-//         res.send(newRecipe);
-//     }) 
-//     .patch(async (req, res) => {
-//         const editedRecipeTalk = await editTalk(req.params.date, req.body.recipe);
-//         res.send(editedRecipeTalk);
-//     })
+    .patch(async (req, res) => {
+        const editedRecipeTalk = await editTalk(req.params.date, req.body.recipe);
+        res.json(editedRecipeTalk);
+    })
+    // .post(async (req, res) => {
+    //     const newRecipe = await addRecipeTalkToDB(req.body.id, req.params.date, req.body.recipe);
+    //     res.send(newRecipe);
+    // }) 
 
 export default router;

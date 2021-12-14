@@ -1,4 +1,13 @@
-export function deleteTalk(date) {
+const form = document.querySelector('.edit-recipe-form');
+
+const button = form.querySelector('.delete-talk-btn');
+button.addEventListener('click', () => {
+    console.log('deleting')
+    const date = form.querySelector('input[name="date"]').value;
+    deleteTalk(date);
+})
+
+function deleteTalk(date) {
 
     const dateObj = {
         date: date

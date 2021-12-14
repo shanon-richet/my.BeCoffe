@@ -19,7 +19,6 @@ router
     .post(async (req, res) => {
         const newRecipe = await addRecipeTalkToDB(req.body.id, req.body.date, req.body.recipe);
         res.send(newRecipe);
-        res.redirect('back');
     }) 
     .patch(async (req, res) => {
         const editedRecipeTalk = await editTalk(req.body.date, req.body.recipe);

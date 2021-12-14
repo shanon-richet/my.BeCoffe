@@ -1,8 +1,8 @@
 const addTalkToDB = () => {
     console.log('in function')
-    const form = document.querySelector('.recipe_form_hidden');
+    const form = document.querySelector('.recipe_form');
 
-    const id = 10;
+    const id = 11;
 
     const formData = {
         id: id,

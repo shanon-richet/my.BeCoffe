@@ -11,30 +11,17 @@ main section {
 }
 
 main .calendar-square {
-    background-color: rgb(17, 83, 224);
-    opacity: 0.5;
-    width: 150px;
-    height: 150px;
+    background-color: lightblue;
+    text-align: center;
+    color: black;
+    height: 20vh;
+    margin: 1vh;
     border-radius: 5%;
-    border: 1px ridge black;
+    border: 2px ridge black;
 }
 
 main .calendar-square:hover {
     cursor: pointer;
-}
-
-.recipe_form_hidden {
-    display: none;
-}
-
-.recipe_form {
-    position: absolute;
-    z-index: 1;
-    background-color: rgb(92, 108, 119);
-    width: 400px;
-    height: 180px;
-    border-radius: 3%;
-    text-align: center;
 }
 
 .recipe_form, .recipe_form label, .recipe_form input {
@@ -82,4 +69,21 @@ main .calendar-square:hover {
     width: 70vw;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+}
+
+.added-recipe-talk {
+    background-color: white;
+}
+
+.recipe_form,
+.edit-recipe-form {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(92, 108, 119);
+    width: 40vw;
+    height: 30vh;
+    border-radius: 3%;
+    text-align: center;
+    flex-direction: column;
 }

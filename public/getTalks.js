@@ -1,5 +1,3 @@
-// find calendar.. const calendar = document.querySelector('.calendar');
-
 const recipetalks = document.querySelector('.upcoming-recipe-talks');
 
 fetch('http://localhost:3000/dashboard/recipe/')
@@ -26,37 +24,51 @@ fetch('http://localhost:3000/dashboard/recipe/')
             recipetalks.appendChild(singleTalk);
         }
 
-        // const calendarDate = findCalendarDate(talk.date);
-        // if (calendarDate !== null) {
-        //     const div = document.createElement('div');
+        const calendarDate = findCalendarDate(talk.date);
+        if (calendarDate !== null) {
+            const div = document.createElement('div');
+            div.classList.add('added-recipe-talk');
 
-        //     const divRecipe = document.createElement('h4');
-        //     divRecipe.innerText = talk.recipe;
+            calendarDate.onclick = null;
 
-        //     const divName = document.createElement('p');
-        //     divName.innerText = talk.name;
+            div.onclick = () => {
+                const form = document.querySelector('.edit-recipe-form');
+                form.style.display = 'flex';
 
-        //     div.appendChild(divRecipe);
-        //     div.appendChild(divName);
+                const addRecipeForm = document.querySelector('.recipe_form');
+                if (addRecipeForm.style.display === 'flex') {
+                    addRecipeForm.style.display = 'none';
+                }
+                
+                const inputDate = form.querySelector('.date')
+                inputDate.value = calendarDate.className.split(" ")[1];
+            }
 
-        //     calendarDate.appendChild(div);
-        // } 
+            const divRecipe = document.createElement('h4');
+            divRecipe.innerText = talk.recipe;
+
+            const divName = document.createElement('p');
+            divName.innerText = talk.name;
+
+            div.appendChild(divRecipe);
+            div.appendChild(divName);
+
+            calendarDate.appendChild(div);
+        } 
     }
 })
 
-// const findCalendarDate = (date) => {
-//     // find all dates on calendar
-//     const allDates = ;
+const findCalendarDate = (date) => {
+    const calendarDates = document.querySelectorAll('.calendar-square');
 
-//     for (const calDate of allDates) {
-//         // find class of calDate (the date)
-//         const dateString = calDate.classList.value;
-//         if (dateString === date) {
-//             return calDate;
-//         }
-//     }
-//     return null;
-// };
+    for (const calDate of calendarDates ) {
+        const dateString = calDate.className.split(" ")[1];
+        if (dateString === date) {
+            return calDate;
+        }
+    }
+    return null;
+};
 
 const isLaterThisWeek = (date) => {
     const today = moment();

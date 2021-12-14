@@ -146,7 +146,7 @@ let classDate = firstMonday;
 for (let i = 5; i < 15; i++) {
   const dateFormatted = moment(classDate).format('YYYY-MM-DD');
   square[i].classList.add(dateFormatted);
-  if (i !== 5 && i % 5 === 0) {
+  if (i !== 5 && (i + 1) % 5 === 0) {
     classDate.setDate(classDate.getDate() + 3)
   }
   else {

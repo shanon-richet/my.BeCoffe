@@ -2,14 +2,7 @@ const recipeForm = document.querySelector('.recipe_form')
 
 const date = new Date();
 const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
-// const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-// for (let i = 0; i < 5; i++) {
-//     const weekday = document.createElement('p')
-
-//     weekday[i].innerText = days[i]
-//     weekday[i].classList.add('weekDays')
-// }
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 for (let i = 0; i < 15; i++) {
     const calendar = document.querySelector('.calendar')

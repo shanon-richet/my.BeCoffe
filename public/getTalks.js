@@ -36,9 +36,7 @@ fetch('http://localhost:3000/dashboard/recipe/')
 
             calendarDate.onclick = null;
 
-            div.onclick = (e) => {
-                console.log('here');
-                console.log(e.target)
+            div.onclick = () => {
                 const form = document.querySelector('.edit-recipe-form');
                 form.style.display = 'flex';
 

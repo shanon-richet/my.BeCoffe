@@ -10,9 +10,12 @@ function deleteTalk(date) {
     })
     .then(response => response.json())
     .then(result => {
+        if (result.error){
+            alert(result.error);
+        } 
         window.location.reload();
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.log('Error:', error);
     });
 }

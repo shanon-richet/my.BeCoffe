@@ -1,7 +1,6 @@
 import pg from 'pg';
 import { user, host, database, database_url, password, port } from './credentials.mjs';
 import DATA from './data.mjs';
-import  {v4 as uuidv4} from 'uuid';
 
 const { Pool } = pg
 const pool = new Pool({
@@ -40,7 +39,7 @@ export const getPassword = async (email) => {
 export const newUser = async (first_name, last_name, email, password, learner) => {
   const client = await pool.connect()
   const exists = await client.query('SELECT email FROM users WHERE email=$1', [email])
-  /* if user does not already exist, row count === 0 */
+  
   if(exists.rowCount === 0){
     await client.query(
       'INSERT INTO users (first_name, last_name, email, password, learner) VALUES ($1, $2, $3, $4, $5)',
@@ -71,7 +70,7 @@ export const addRecipeTalkToDB = async (user_id, date, recipe) => {
   return result;
 }
 
-export const editTalk = async (date, recipe) => {
+export const editTalk = async (checkId, date, recipe) => {
   const client = await pool.connect()
 
   if (recipe === '') {
@@ -79,22 +78,30 @@ export const editTalk = async (date, recipe) => {
   }
 
   const edit = await client.query(
-    'UPDATE dates SET recipe = $1 WHERE date = $2', [recipe, date]
+    'UPDATE dates SET recipe = $1 WHERE date = $2 AND user_id = $3', [recipe, date], checkId
   )
   client.release();
+
+  if (edit === undefined) {
+    return false;
+  }
 
   return true;
 }
 
-export const deleteTalk = async (date) => {
+export const deleteTalk = async (checkId, date) => {
   const client = await pool.connect()
 
-  const talk = await client.query(
-      'DELETE FROM dates WHERE date = $1', [date]
+  const isUser = await client.query(
+      'DELETE FROM dates WHERE date = $1 AND user_id = $2', [date, checkId]
   );
   client.release();
 
-  return talk;
+  if (isUser.rowCount === 0) {
+    return false;
+  }
+
+  return true;
 }
 
 export const getAllTalks = async () => {

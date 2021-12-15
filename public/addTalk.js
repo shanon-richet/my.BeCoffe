@@ -3,10 +3,7 @@ const addTalkToDB = (e) => {
 
     const form = document.querySelector('.recipe_form');
 
-    const id = 5;
-
     const formData = {
-        id: id,
         date: form.date.value,
         recipe: form.recipe.value,
     };
@@ -19,10 +16,12 @@ const addTalkToDB = (e) => {
       body: JSON.stringify(formData)
     }).then(response => response.json())
     .then(result => {
-        console.log(result)
+        if (result.error){
+            alert(result.error);
+        }
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.log('Error:', error);
     });
 
     form.style.display = 'none';

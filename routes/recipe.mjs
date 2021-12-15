@@ -13,7 +13,7 @@ const router = Router();
 router
     .route('/')
     .get(async(req, res) => {
-        const recipeTalks = await getAllTalks(req.session.userid);
+        const recipeTalks = await getAllTalks();
         res.json(recipeTalks);
     })
     .post(async (req, res) => {
@@ -21,19 +21,22 @@ router
         if (!newRecipe) {
             return res.status(403).send({error: 'Invalid fields'});
         }
-        return res.send({info: 'Recipe has been added'});
+        return res.send({info: 'Recipe talk has been added'});
     }) 
 
 router
     .route('/:date')
     .delete(async (req, res) => {
-        const deletedTalk = await deleteTalk(req.params.date);
-        return res.send(deletedTalk);
+        const deletedTalk = await deleteTalk(req.session.userid, req.params.date);
+        if (!deletedTalk) {
+            return res.status(403).send({error: 'Cannot delete recipe talks published by other users'});
+        }
+        return res.send({info: 'Recipe talk has been deleted'});
     })
     .patch(async (req, res) => {
-        const editedRecipeTalk = await editTalk(req.params.date, req.body.recipe);
+        const editedRecipeTalk = await editTalk(req.session.userid, req.params.date, req.body.recipe);
         if (!editedRecipeTalk) {
-            return res.status(403).send({error: 'Recipe topic must not be empty'});
+            return res.status(403).send({error: 'A talk can only be edited by its original author and the recipe field must not be empty'});
         }
         return res.send({info: 'Recipe talk has been edited'});
     })

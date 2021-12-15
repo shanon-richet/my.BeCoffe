@@ -5,11 +5,9 @@ main {
     width: 900px;
     margin: 50px;
 }
-
 main section {
     margin-top: -30px;
 }
-
 main .calendar-square {
     background-color: lightblue;
     text-align: center;
@@ -19,20 +17,16 @@ main .calendar-square {
     border-radius: 5%;
     border: 2px ridge black;
 }
-
 main .calendar-square:hover {
     cursor: pointer;
 }
-
 .recipe_form, .recipe_form label, .recipe_form input {
     margin: 10px;
 }
-
 .recipe_form label {
     float: left;
 }
-
-.weekDays {
+.calendar-square {
   background: green;
   height: 40px;
   text-align: center;
@@ -43,38 +37,31 @@ main .calendar-square:hover {
     display: flex;
     flex-direction: row;
 }
-
 .upcoming-recipe-talks {
     display: flex;
     flex-direction: column;
     width: 20vw;
 }
-
 .one-upcoming-talk {
     margin: 2vh 0;
 }
-
 .one-upcoming-talk > p,
 .one-upcoming-talk > h4 {
     margin: 0;
 }
-
 .calendar-div {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .calendar {
     width: 70vw;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
-
 .added-recipe-talk {
     background-color: white;
 }
-
 .recipe_form,
 .edit-recipe-form {
     display: none;

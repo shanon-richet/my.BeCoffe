@@ -65,29 +65,23 @@ if (date.getDay() == 4) {
   square[19].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('en', options);//jeudi
   square[20].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('en', options);
 }
+
 if (date.getDay() == 3) {
-  square[5].innerText= new Date(date.getTime() - 172000000).toLocaleDateString('en', options);//lundi
-  square[6].innerText= new Date(date.getTime() - 86400000).toLocaleDateString('en', options);//mardi
-  square[7].innerText= new Date(date.getTime()).toLocaleDateString('en', options);//mercredi
-  square[8].innerText= new Date(date.getTime() + 86400000).toLocaleDateString('en', options);//jeudi
-  square[9].innerText= new Date(date.getTime() + 172000000).toLocaleDateString('en', options);//vendredi
-  square[10].innerText= new Date(date.getTime() + 432000000).toLocaleDateString('en', options);//lundi
-  square[11].innerText= new Date(date.getTime() + 518400000).toLocaleDateString('en', options);//mardi
-  square[12].innerText= new Date(date.getTime() + 604800000).toLocaleDateString('en', options);//mercredi
-  square[13].innerText= new Date(date.getTime() + 691200000).toLocaleDateString('en', options);
-  square[14].innerText= new Date(date.getTime() + 777600000).toLocaleDateString('en', options);//vendredi
-  square[15].innerText= new Date(date.getTime() + 1036800000).toLocaleDateString('en', options);
-  square[16].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('en', options);
-  square[17].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('en', options);
-  square[18].innerText= new Date(date.getTime() + 1296000000).toLocaleDateString('en', options);//jeudi
-  square[19].innerText= new Date(date.getTime() + 1382400000).toLocaleDateString('en', options);
-  square[13].innerText= new Date(date.getTime() + 518400000).toLocaleDateString('en', options);//mardi
-  square[14].innerText= new Date(date.getTime() + 604800000).toLocaleDateString('en', options);//mercredi
-  square[15].innerText= new Date(date.getTime() + 864000000).toLocaleDateString('en', options);
-  square[16].innerText= new Date(date.getTime() + 950400000).toLocaleDateString('en', options);//vendredi
-  square[17].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('en', options);//lundi
-  square[18].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('en', options);//mardi
-  square[19].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('en', options);
+  square[5].innerText= new Date(date.getTime() - 172000000).toLocaleDateString('en-EN', options);//lundi
+  square[6].innerText= new Date(date.getTime() - 86400000).toLocaleDateString('en-EN', options);//mardi
+  square[7].innerText= new Date(date.getTime()).toLocaleDateString('en-EN', options);//mercredi
+  square[8].innerText= new Date(date.getTime() + 86400000).toLocaleDateString('en-EN', options);//jeudi
+  square[9].innerText= new Date(date.getTime() + 172000000).toLocaleDateString('en-EN', options);//vendredi
+  square[10].innerText= new Date(date.getTime() + 432000000).toLocaleDateString('en-EN', options);//lundi
+  square[11].innerText= new Date(date.getTime() + 518400000).toLocaleDateString('en-EN', options);//mardi
+  square[12].innerText= new Date(date.getTime() + 604800000).toLocaleDateString('en-EN', options);//mercredi
+  square[13].innerText= new Date(date.getTime() + 691200000).toLocaleDateString('en-EN', options);
+  square[14].innerText= new Date(date.getTime() + 777600000).toLocaleDateString('en-EN', options);//vendredi
+  square[15].innerText= new Date(date.getTime() + 1036800000).toLocaleDateString('en-EN', options);
+  square[16].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('en-EN', options);
+  square[17].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('en-EN', options);
+  square[18].innerText= new Date(date.getTime() + 1296000000).toLocaleDateString('en-EN', options);//jeudi
+  square[19].innerText= new Date(date.getTime() + 1382400000).toLocaleDateString('en-EN', options);
 }
 
 if (date.getDay() == 2) {

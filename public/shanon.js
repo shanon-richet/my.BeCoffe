@@ -77,12 +77,12 @@ if (date.getDay() == 3) {
   square[10].innerText= new Date(date.getTime() + 432000000).toLocaleDateString('fr-FR', options);//lundi
   square[13].innerText= new Date(date.getTime() + 518400000).toLocaleDateString('fr-FR', options);//mardi
   square[14].innerText= new Date(date.getTime() + 604800000).toLocaleDateString('fr-FR', options);//mercredi
-  square[15].innerText= new Date(date.getTime() + 864000000).toLocaleDateString('fr-FR', options);
-  square[16].innerText= new Date(date.getTime() + 950400000).toLocaleDateString('fr-FR', options);//vendredi
+  // square[15].innerText= new Date(date.getTime() + 864000000).toLocaleDateString('fr-FR', options);
+  // square[16].innerText= new Date(date.getTime() + 950400000).toLocaleDateString('fr-FR', options);//vendredi
   
-  square[17].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('fr-FR', options);//lundi
-  square[18].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('fr-FR', options);//mardi
-  square[19].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('fr-FR', options);
+  // square[17].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('fr-FR', options);//lundi
+  // square[18].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('fr-FR', options);//mardi
+  // square[19].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('fr-FR', options);
 
 }
 
@@ -99,11 +99,11 @@ if (date.getDay() == 2) {
   square[13].innerText= new Date(date.getTime() + 777600000).toLocaleDateString('fr-FR', options);
   square[14].innerText= new Date(date.getTime() + 864000000).toLocaleDateString('fr-FR', options);//vendredi
   
-  // square[15].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('fr-FR', options);//lundi
-  // square[16].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('fr-FR', options);
-  // square[17].innerText= new Date(date.getTime() + 1296000000).toLocaleDateString('fr-FR', options);//mercredi
-  // square[18].innerText= new Date(date.getTime() + 1382400000).toLocaleDateString('fr-FR', options);//jeudi
-  // square[19].innerText= new Date(date.getTime() + 1468800000).toLocaleDateString('fr-FR', options);//vendredi
+  square[15].innerText= new Date(date.getTime() + 1123200000).toLocaleDateString('fr-FR', options);//lundi
+  square[16].innerText= new Date(date.getTime() + 1209600000).toLocaleDateString('fr-FR', options);
+  square[17].innerText= new Date(date.getTime() + 1296000000).toLocaleDateString('fr-FR', options);//mercredi
+  square[18].innerText= new Date(date.getTime() + 1382400000).toLocaleDateString('fr-FR', options);//jeudi
+  square[19].innerText= new Date(date.getTime() + 1468800000).toLocaleDateString('fr-FR', options);//vendredi
 
 }
 

@@ -1,8 +1,9 @@
-const addTalkToDB = () => {
-    console.log('in function')
+const addTalkToDB = (e) => {
+    e.preventDefault();
+
     const form = document.querySelector('.recipe_form');
 
-    const id = 4;
+    const id = 5;
 
     const formData = {
         id: id,
@@ -18,14 +19,13 @@ const addTalkToDB = () => {
       body: JSON.stringify(formData)
     }).then(response => response.json())
     .then(result => {
-        alert(result[0].message);
+        console.log(result)
     })
     .catch(error => {
         console.error('Error:', error);
     });
 
     form.style.display = 'none';
-
     window.location.reload(); 
 }
 

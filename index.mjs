@@ -56,20 +56,20 @@ export const newUser = async (first_name, last_name, email, password, learner) =
   return false
 }
 
-const getFullNameFromUserId = async (user_id) => {
-  const client = await pool.connect()
-  const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [user_id])
-  const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
+// const getFullNameFromUserId = async (user_id) => {
+//   const client = await pool.connect()
+//   const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [user_id])
+//   const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
 
-  client.release();
+//   client.release();
 
-  return (full_name);
-}
+//   return (full_name);
+// }
 
 export const addRecipeTalkToDB = async (user_id, date, recipe) => {
   const client = await pool.connect()
   const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [user_id])
-  const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
+  // const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
 
   const result = await client.query(
     'INSERT INTO dates (user_id, date, recipe, available) VALUES ($1, $2, $3, $4)',
@@ -77,9 +77,14 @@ export const addRecipeTalkToDB = async (user_id, date, recipe) => {
   )
   client.release();
 
-  console.log(full_name, result)
+  // if (!result) {
+  //   return false;
+  // }
 
-  return (result);
+  // console.log(full_name, result)
+
+  console.log(result)
+  return result;
 }
 
 export const editTalk = async (date, recipe) => {

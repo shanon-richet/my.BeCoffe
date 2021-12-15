@@ -37,11 +37,9 @@ export const getPassword = async (email) => {
     return false;
   }
 }
-
 export const newUser = async (first_name, last_name, email, password, learner) => {
   const client = await pool.connect()
   const exists = await client.query('SELECT email FROM users WHERE email=$1', [email])
-
   /* if user does not already exist, row count === 0 */
   if(exists.rowCount === 0){
     await client.query(
@@ -51,7 +49,7 @@ export const newUser = async (first_name, last_name, email, password, learner) =
     client.release()
     return true
   }
-  
+
   client.release()
   return false
 }

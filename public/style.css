@@ -1,24 +1,45 @@
+body {
+    font-family: 'Spectral SC', serif;  
+    color: #31081F;
+    background-color: #94849B;
+}
+main, h1, .recipe_form {
+    background-color: #320D6D;
+    color: #FFD447;
+    border-radius: 1%;
+    border: 1px ridge #FFD447;
+}
 main {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    width: 900px;
+    width: 1400px;
+    height: 650px;
     margin: 50px;
 }
-main section {
-    margin-top: -30px;
-}
 main .calendar-square {
-    background-color: lightblue;
     text-align: center;
-    color: black;
     height: 20vh;
     margin: 1vh;
-    border-radius: 5%;
-    border: 2px ridge black;
 }
 main .calendar-square:hover {
     cursor: pointer;
+}
+main .calendar-square, div button, .logout {
+    background-color: #758ECD;
+    color: #320D6D;
+    border-radius: 5%;
+    border: 2px ridge #FFD447;
+}
+div button, .logout, .edit-recipe-form {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.logout:hover {
+    background-color: #BCF4F5;
+}
+.week-days {
+    color: #BCF4F5;
 }
 .recipe_form, .recipe_form label, .recipe_form input {
     margin: 10px;
@@ -27,12 +48,10 @@ main .calendar-square:hover {
     float: left;
 }
 .calendar-square {
-  background: green;
   height: 40px;
   text-align: center;
   color: white;
 }
-
 .recipe-talks {
     display: flex;
     flex-direction: row;
@@ -41,6 +60,7 @@ main .calendar-square:hover {
     display: flex;
     flex-direction: column;
     width: 20vw;
+    margin-left: 10px;
 }
 .one-upcoming-talk {
     margin: 2vh 0;
@@ -60,17 +80,19 @@ main .calendar-square:hover {
     grid-template-columns: repeat(5, 1fr);
 }
 .added-recipe-talk {
-    background-color: white;
+    background-color: #BCF4F5;
 }
 .recipe_form,
 .edit-recipe-form {
     display: none;
     position: absolute;
     z-index: 1;
-    background-color: rgb(92, 108, 119);
     width: 40vw;
     height: 30vh;
-    border-radius: 3%;
     text-align: center;
     flex-direction: column;
+}
+.close-form {
+    width: 30px;
+    margin-left: 450px ;
 }

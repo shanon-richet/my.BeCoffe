@@ -12,8 +12,9 @@ function deleteTalk(date) {
     .then(result => {
         if (result.error){
             alert(result.error);
-        } 
-        window.location.reload();
+        } else {
+            window.location.reload();
+        }
     })
     .catch(error => {
         console.log('Error:', error);

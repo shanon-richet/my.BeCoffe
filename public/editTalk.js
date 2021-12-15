@@ -25,8 +25,9 @@ const editTalk = (date) => {
     .then(result => {
         if (result.error){
             alert(result.error);
+        } else {
+            window.location.reload();
         }
-        window.location.reload();
     })
     .catch(error => {
         console.log('Error:', error);

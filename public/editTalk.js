@@ -1,20 +1,20 @@
-const editBtn = document.querySelector('.edit-recipe-submit');
-editBtn.addEventListener('click', () => {
-    editTalk();
+const editForm = document.querySelector('.edit-recipe-form');
+
+const editButton = editForm.querySelector('.edit-recipe-btn');
+editButton.addEventListener('click', () => {
+    const date = editForm.querySelector('input[name="date"]').value;
+    editTalk(date);
 })
 
-const form = document.querySelector('.edit-recipe-form');
 
-const editTalk = () => {
-    const newRecipe = form.querySelector('input[name="recipe"]').value;
-    const newDate = form.querySelector('input[name="date"]').value;
+const editTalk = (date) => {
+    const newRecipe = editForm.querySelector('input[name="recipe"]').value;
 
     const editedData = {
-        date: newDate,
         recipe: newRecipe
     };
 
-    fetch('http://localhost:3000/dashboard/recipe/' + newDate, {
+    fetch('http://localhost:3000/dashboard/recipe/' + date, {
       method: 'PATCH',
       headers: {
           'Content-Type': 'application/json'
@@ -24,13 +24,9 @@ const editTalk = () => {
     .then(response => response.json())
     .then(result => {
         console.log(result);
-        if (result[0].message) {
-            alert(result[0].message);
-        }
         window.location.reload();
     })
     .catch(error => {
         console.error('Error:', error);
     });
-
 }

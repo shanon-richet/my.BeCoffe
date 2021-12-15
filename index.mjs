@@ -48,23 +48,6 @@ export const getIdFromUsername = async (email) => {
   }
 }
 
-export const newUser = async (first_name, last_name, email, password, learner) => {
-  const client = await pool.connect()
-  const exists = await client.query('SELECT email FROM users WHERE email=$1', [email])
-
-  if(exists.rowCount === 0){
-    await client.query(
-      'INSERT INTO users (first_name, last_name, email, password, learner) VALUES ($1, $2, $3, $4, $5)',
-      [first_name, last_name, email, password, learner]
-    )
-    client.release()
-    return true
-  }
-  
-  client.release()
-  return false
-}
-
 export const addRecipeTalkToDB = async (user_id, date, recipe) => {
   const client = await pool.connect()
 
@@ -83,19 +66,29 @@ export const addRecipeTalkToDB = async (user_id, date, recipe) => {
 }
 
 export const editTalk = async (checkId, date, recipe) => {
-  const client = await pool.connect()
-
   if (recipe === '') {
     return false;
   }
 
-  const edit = await client.query(
-    'UPDATE dates SET recipe = $1 WHERE date = $2 AND user_id = $3', [recipe, date, checkId]
-  )
-  client.release();
+  const client = await pool.connect()
+  const isCoach = await client.query(
+    'SELECT learner FROM users WHERE id = $1', [checkId]
+  );
 
-  if (edit.rowCount === 0) {
-    return false;
+  if (isCoach.rows[0].learner === false) {
+      await client.query(
+        'UPDATE dates SET recipe = $1 WHERE date = $2', [recipe, date]
+    );
+    client.release();
+  } else {
+    const edit = await client.query(
+      'UPDATE dates SET recipe = $1 WHERE date = $2 AND user_id = $3', [recipe, date, checkId]
+    )
+    client.release();
+
+    if (edit.rowCount === 0) {
+      return false;
+    }
   }
 
   return true;
@@ -103,14 +96,24 @@ export const editTalk = async (checkId, date, recipe) => {
 
 export const deleteTalk = async (checkId, date) => {
   const client = await pool.connect()
-
-  const isUser = await client.query(
-      'DELETE FROM dates WHERE date = $1 AND user_id = $2', [date, checkId]
+  const isCoach = await client.query(
+    'SELECT learner FROM users WHERE id = $1', [checkId]
   );
-  client.release();
 
-  if (isUser.rowCount === 0) {
-    return false;
+  if (isCoach.rows[0].learner === false) {
+      await client.query(
+        'DELETE FROM dates WHERE date = $1', [date]
+    );
+    client.release();
+  } else {
+    const isUser = await client.query(
+      'DELETE FROM dates WHERE date = $1 AND user_id = $2', [date, checkId]
+    );
+    client.release();
+
+    if (isUser.rowCount === 0) {
+      return false;
+    }
   }
 
   return true;
@@ -118,7 +121,10 @@ export const deleteTalk = async (checkId, date) => {
 
 export const getAllTalks = async () => {
   const client = await pool.connect()
-  const response = await client.query('SELECT first_name, last_name, date, recipe FROM dates LEFT JOIN users on dates.user_id = users.id')
+  const response = await client.query(
+    `SELECT first_name, last_name, date, recipe FROM dates 
+    LEFT JOIN users ON dates.user_id = users.id`
+  )
   client.release();
 
   const talks = response.rows;
@@ -137,10 +143,28 @@ export const getAllTalks = async () => {
   return (allTalks);
 }
 
+// If we include a registration part...
 export const setupDB = async () => {
   for (const [first_name, last_name, email, password, learner] of DATA) {
     await newUser(first_name, last_name, email, password, learner)
   }
 
   return true
+}
+
+export const newUser = async (first_name, last_name, email, password, learner) => {
+  const client = await pool.connect()
+  const exists = await client.query('SELECT email FROM users WHERE email=$1', [email])
+
+  if (exists.rowCount === 0){
+    await client.query(
+      'INSERT INTO users (first_name, last_name, email, password, learner) VALUES ($1, $2, $3, $4, $5)',
+      [first_name, last_name, email, password, learner]
+    )
+    client.release()
+    return true
+  }
+  
+  client.release()
+  return false
 }

@@ -5,7 +5,7 @@ import cors from "cors";
 import  {v4 as uuidv4} from 'uuid';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { getUsername, getPassword } from './index.mjs'
+import { getUsername, getPassword, getIdFromUsername } from './index.mjs'
 import recipeRoute from './routes/recipe.mjs';
 
 const PORT = 3000;
@@ -50,7 +50,7 @@ app.post('/logout',(req,res) => {
 app.post('/dashboard', async(req,res) => {
     if(req.body.username == await getUsername(req.body.username) && req.body.password == await getPassword(req.body.username)){
         session = req.session;
-        session.userid = req.body.username;
+        session.userid = await getIdFromUsername(req.body.username);
         res.sendFile(__dirname + '/views/dashboard.html');
     }
     else{

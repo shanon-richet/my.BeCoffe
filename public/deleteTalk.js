@@ -1,15 +1,16 @@
-export function deleteTalk(date) {
+const form = document.querySelector('.edit-recipe-form');
 
-    const dateObj = {
-        date: date
-    };
+const button = form.querySelector('.delete-talk-btn');
+button.addEventListener('click', () => {
+    const date = form.querySelector('input[name="date"]').value;
+    deleteTalk(date);
+})
 
-    fetch('http://localhost:3000/dashboard/recipe/', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dateObj)
+function deleteTalk(date) {
+    console.log(date);
+
+    fetch('http://localhost:3000/dashboard/recipe/' + date, {
+      method: 'DELETE'
     })
     .then(response => response.json())
     .then(result => {

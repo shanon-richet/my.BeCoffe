@@ -29,7 +29,8 @@
             <div class= "calendar-div">
                 <h2>Calendar</h2>
                 <div class="calendar">
-                    <form class= "recipe_form_hidden" action="/dashboard/recipe" method="post">
+                    <form class= "recipe_form" action="/dashboard/recipe" method="post">
+                        <button type="button" class="close-form">×</button>
                         <div>
                             <label for="recipe">Recipe :</label>
                             <input type="text" id="recipe" name="recipe">
@@ -44,13 +45,29 @@
                         </div>
                         <input class="submit_recipe" type="submit" value="Submit">
                     </form>
+
+                    <form class= "edit-recipe-form" method="patch">
+                        <button type="button" class="close-form">×</button>
+                        <h2>Edit Talk</h2>
+                        <div>
+                            <label for="recipe">Recipe :</label>
+                            <input type="text" id="recipe" name="recipe">
+                        </div>
+                        <div>
+                            <label for="date">Date : </label>
+                            <input type="date" value="" class="date" name="date">
+                        </div>
+                        <input class="edit-recipe-submit" type="submit" value="Submit">
+                        <button type="button" class="delete-talk-btn">Delete Talk</button>
+                    </form>
                 </div>     
             </div>
         </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="shanon.js"></script>
     <script src="getTalks.js"></script>
     <script src="addTalk.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="deleteTalk.js"></script>
 </body>
 </html>

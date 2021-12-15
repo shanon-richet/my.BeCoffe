@@ -1,6 +1,7 @@
 import pg from 'pg';
 import { user, host, database, database_url, password, port } from './credentials.mjs';
 import DATA from './data.mjs';
+import  {v4 as uuidv4} from 'uuid';
 
 const { Pool } = pg
 const pool = new Pool({
@@ -55,20 +56,30 @@ export const newUser = async (first_name, last_name, email, password, learner) =
   return false
 }
 
-export const addRecipeTalkToDB = async (id, date, recipe) => {
+const getFullNameFromUserId = async (user_id) => {
   const client = await pool.connect()
-  const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [id])
+  const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [user_id])
   const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
-  console.log(full_name);
-  console.log(user)
 
-  await client.query(
+  client.release();
+
+  return (full_name);
+}
+
+export const addRecipeTalkToDB = async (user_id, date, recipe) => {
+  const client = await pool.connect()
+  const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [user_id])
+  const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
+
+  const result = await client.query(
     'INSERT INTO dates (user_id, date, recipe, available) VALUES ($1, $2, $3, $4)',
-    [id, date, recipe, false]
+    [user_id, date, recipe, false]
   )
   client.release();
 
-  return ({full_name, date, recipe});
+  console.log(full_name, result)
+
+  return (result);
 }
 
 export const editTalk = async (date, recipe) => {

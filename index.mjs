@@ -94,7 +94,7 @@ export const editTalk = async (checkId, date, recipe) => {
   )
   client.release();
 
-  if (edit === undefined) {
+  if (edit.rowCount === 0) {
     return false;
   }
 

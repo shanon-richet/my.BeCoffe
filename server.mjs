@@ -47,6 +47,14 @@ app.post('/logout',(req,res) => {
 });
 
 // Dashboard
+app.get('/dashboard',(req,res) => {
+    if(req.session.userid){
+        res.sendFile(__dirname + '/views/dashboard.html');
+    } else {
+        res.sendFile(__dirname + '/views/index.html')
+    }
+});
+
 app.post('/dashboard', async(req,res) => {
     if(req.body.username == await getUsername(req.body.username) && req.body.password == await getPassword(req.body.username)){
         session = req.session;

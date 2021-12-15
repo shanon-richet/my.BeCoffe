@@ -36,7 +36,7 @@ router
     .patch(async (req, res) => {
         const editedRecipeTalk = await editTalk(req.session.userid, req.params.date, req.body.recipe);
         if (!editedRecipeTalk) {
-            return res.status(403).send({error: 'A talk can only be edited by its original author and the recipe field must not be empty'});
+            return res.status(403).send({error: 'A talk can only be edited by its original author and the "recipe" field must not be empty'});
         }
         return res.send({info: 'Recipe talk has been edited'});
     })

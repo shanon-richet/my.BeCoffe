@@ -3,7 +3,7 @@ body {
     color: #31081F;
     background-color: #94849B;
 }
-main, h1, .recipe_form {
+main, h1, .recipe_form, .edit-recipe-form {
     background-color: #320D6D;
     color: #FFD447;
     border-radius: 1%;

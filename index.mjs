@@ -90,7 +90,7 @@ export const editTalk = async (checkId, date, recipe) => {
   }
 
   const edit = await client.query(
-    'UPDATE dates SET recipe = $1 WHERE date = $2 AND user_id = $3', [recipe, date], checkId
+    'UPDATE dates SET recipe = $1 WHERE date = $2 AND user_id = $3', [recipe, date, checkId]
   )
   client.release();
 

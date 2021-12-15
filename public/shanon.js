@@ -3,8 +3,9 @@ const recipeForm = document.querySelector('.recipe_form')
 const date = new Date();
 const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const numberOfElements = 20;
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < numberOfElements; i++) {
     const calendar = document.querySelector('.calendar')
     const squares = document.createElement('div')
     squares.classList.add('calendar-square')
@@ -150,7 +151,7 @@ for (const button of closeFormBtns) {
 const firstMonday = new Date('2021-12-13');
 let classDate = firstMonday;
 
-for (let i = 5; i < 15; i++) {
+for (let i = 5; i < numberOfElements; i++) {
   const dateFormatted = moment(classDate).format('YYYY-MM-DD');
   square[i].classList.add(dateFormatted);
   if (i !== 5 && (i + 1) % 5 === 0) {

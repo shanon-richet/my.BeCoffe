@@ -38,6 +38,17 @@ export const getPassword = async (email) => {
   }
 }
 
+export const getIdFromUsername = async (email) => {
+  const client = await pool.connect()
+  const query = await client.query('SELECT id FROM users WHERE email=$1', [email])
+
+  if(query.rowCount !== 0) {
+    return query.rows[0].id
+  } else {
+    return false;
+  }
+}
+
 export const newUser = async (first_name, last_name, email, password, learner) => {
   const client = await pool.connect()
   const exists = await client.query('SELECT email FROM users WHERE email=$1', [email])
@@ -56,20 +67,13 @@ export const newUser = async (first_name, last_name, email, password, learner) =
   return false
 }
 
-// const getFullNameFromUserId = async (user_id) => {
-//   const client = await pool.connect()
-//   const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [user_id])
-//   const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
-
-//   client.release();
-
-//   return (full_name);
-// }
-
 export const addRecipeTalkToDB = async (user_id, date, recipe) => {
   const client = await pool.connect()
-  const user = await client.query('SELECT first_name, last_name FROM users WHERE id=$1', [user_id])
-  // const full_name = `${user.rows[0].first_name} ${user.rows[0].last_name}`;
+
+  const checkDate = new Date();
+  if (!(checkDate instanceof Date && !isNaN(checkDate.valueOf())) || recipe === '') {
+    return false;
+  }
 
   const result = await client.query(
     'INSERT INTO dates (user_id, date, recipe, available) VALUES ($1, $2, $3, $4)',
@@ -77,25 +81,22 @@ export const addRecipeTalkToDB = async (user_id, date, recipe) => {
   )
   client.release();
 
-  // if (!result) {
-  //   return false;
-  // }
-
-  // console.log(full_name, result)
-
-  console.log(result)
   return result;
 }
 
 export const editTalk = async (date, recipe) => {
   const client = await pool.connect()
 
+  if (recipe === '') {
+    return false;
+  }
+
   const edit = await client.query(
     'UPDATE dates SET recipe = $1 WHERE date = $2', [recipe, date]
   )
   client.release();
 
-  return edit;
+  return true;
 }
 
 export const deleteTalk = async (date) => {

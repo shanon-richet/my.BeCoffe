@@ -1,14 +1,10 @@
-const form = document.querySelector('.edit-recipe-form');
-
-const button = form.querySelector('.delete-talk-btn');
-button.addEventListener('click', () => {
-    const date = form.querySelector('input[name="date"]').value;
+const deleteButton = editForm.querySelector('.delete-talk-btn');
+deleteButton.addEventListener('click', () => {
+    const date = editForm.querySelector('input[name="date"]').value;
     deleteTalk(date);
 })
 
 function deleteTalk(date) {
-    console.log(date);
-
     fetch('http://localhost:3000/dashboard/recipe/' + date, {
       method: 'DELETE'
     })

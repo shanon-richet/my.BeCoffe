@@ -36,22 +36,10 @@ export const getPassword = async (email) => {
     return false;
   }
 }
-
-export const getIdFromUsername = async (email) => {
-  const client = await pool.connect()
-  const query = await client.query('SELECT id FROM users WHERE email=$1', [email])
-
-  if(query.rowCount !== 0) {
-    return query.rows[0].id
-  } else {
-    return false;
-  }
-}
-
 export const newUser = async (first_name, last_name, email, password, learner) => {
   const client = await pool.connect()
   const exists = await client.query('SELECT email FROM users WHERE email=$1', [email])
-
+  
   if(exists.rowCount === 0){
     await client.query(
       'INSERT INTO users (first_name, last_name, email, password, learner) VALUES ($1, $2, $3, $4, $5)',
@@ -60,7 +48,7 @@ export const newUser = async (first_name, last_name, email, password, learner) =
     client.release()
     return true
   }
-  
+
   client.release()
   return false
 }
@@ -141,6 +129,5 @@ export const setupDB = async () => {
   for (const [first_name, last_name, email, password, learner] of DATA) {
     await newUser(first_name, last_name, email, password, learner)
   }
-
   return true
 }

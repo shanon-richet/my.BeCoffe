@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href= "style.css" rel= "stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>My Dashboard</h1>
     <main>
         <form action="/logout" method="post">
-            <input value="logout" type="submit">
+            <input class= "logout" value="logout" type="submit">
         </form>
 
         <div>
@@ -42,7 +45,7 @@
                         <input class="submit_recipe" type="submit" value="Submit">
                     </form>
 
-                    <form class= "edit-recipe-form">
+                    <form class= "edit-recipe-form" method="patch">
                         <button type="button" class="close-form">×</button>
                         <h2>Edit Talk</h2>
                         <div>
@@ -53,7 +56,7 @@
                             <label for="date">Date : </label>
                             <input type="date" value="" class="date" name="date">
                         </div>
-                        <button type="button" class="edit-recipe-btn">Submit</button>
+                        <input class="edit-recipe-submit" type="submit" value="Submit">
                         <button type="button" class="delete-talk-btn">Delete Talk</button>
                     </form>
                 </div>     
@@ -64,7 +67,6 @@
     <script src="shanon.js"></script>
     <script src="getTalks.js"></script>
     <script src="addTalk.js"></script>
-    <script src="editTalk.js"></script>
     <script src="deleteTalk.js"></script>
 </body>
 </html>
